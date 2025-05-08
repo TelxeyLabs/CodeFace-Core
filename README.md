@@ -7,7 +7,7 @@ Modern AI chat interface with a cyber-neon theme, featuring light and dark mode.
 
 ## Version
 
-Current version: v0.1.0
+Current version: v0.1.2
 
 ## Description
 
