@@ -1,4 +1,7 @@
-# CodeFace
+<div align="center">
+  <img src="public/logos/logo.png" alt="CodeFace Logo" width="150px" />
+  <h1>CodeFace</h1>
+</div>
 
 Modern AI chat interface with a cyber-neon theme, featuring light and dark mode.
 
