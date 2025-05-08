@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/logos/logo.png" alt="CodeFace Logo" width="150px" />
+  <img src="public/logos/logo.gif" alt="CodeFace Logo" width="150px" />
   <h1>CodeFace</h1>
 </div>
 
