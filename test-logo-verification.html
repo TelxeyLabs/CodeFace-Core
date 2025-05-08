@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Verification Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+        }
+        
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .logo-item {
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .logo-header {
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #eaeaea;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            word-break: break-all;
+        }
+        
+        .bg-white, .bg-dark {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+        
+        .bg-white {
+            background-color: white;
+        }
+        
+        .bg-dark {
+            background-color: #1e293b; /* Slate-800, from dark theme */
+            color: white;
+        }
+        
+        .bg-label {
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        img {
+            max-width: 100%;
+            max-height: 120px;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Video container styling */
+        .video-container {
+            max-width: 150px;
+            max-height: 120px;
+            margin: 0 auto;
+        }
+        
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .controls {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Logo Verification Test</h1>
+        <p>This page tests all logo files for transparency and color correctness on different backgrounds.</p>
+        
+        <div class="controls">
+            <button id="toggleDarkMode">Toggle Dark Mode</button>
+        </div>
+        
+        <!-- Standard Logo Files -->
+        <div class="section">
+            <h2>Standard Logo Files</h2>
+            <div class="grid" id="standard-logos">
+                <!-- Will be populated via JavaScript -->
+            </div>
+        </div>
+        
+        <!-- RGB Logo Files -->
+        <div class="section">
+            <h2>RGB Logo Files</h2>
+            <div class="grid" id="rgb-logos">
+                <!-- Will be populated via JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Animation Files -->
+        <div class="section">
+            <h2>Animation Files</h2>
+            <div class="grid" id="animation-files">
+                <!-- Will be populated via JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Standard logo files
+        const standardLogos = [
+            'public/logos/logo.png',
+            'public/logos/logo.svg',
+            'public/logos/logo.gif',
+            'public/logos/logo_lq.svg',
+            'public/logos/favicon.ico'
+        ];
+        
+        // RGB logo files
+        const rgbLogos = [
+            'public/logos/logo-rgb.png',
+            'public/logos/logo-rgb.svg',
+            'public/logos/logo-rgb.gif'
+        ];
+        
+        // Animation files
+        const animationFiles = [
+            'public/logos/animate.mp4',
+            'public/logos/animate-rgb.mp4',
+            'public/logos/animate_hq.mp4',
+            'public/logos/animate_hq-rgb.mp4',
+            'public/logos/animate_lq.mp4',
+            'public/logos/animate_lq-rgb.mp4',
+            'public/logos/think.mp4'
+        ];
+        
+        // Function to create logo item
+        function createLogoItem(file) {
+            const ext = file.split('.').pop().toLowerCase();
+            
+            const logoItem = document.createElement('div');
+            logoItem.className = 'logo-item';
+            
+            const header = document.createElement('div');
+            header.className = 'logo-header';
+            header.textContent = file.split('/').pop(); // Show just the filename
+            logoItem.appendChild(header);
+            
+            // White background section
+            const whiteSection = document.createElement('div');
+            const whiteBg = document.createElement('div');
+            whiteBg.className = 'bg-white';
+            const whiteLabel = document.createElement('div');
+            whiteLabel.className = 'bg-label';
+            whiteLabel.textContent = 'White Background';
+            
+            // Dark background section
+            const darkSection = document.createElement('div');
+            const darkBg = document.createElement('div');
+            darkBg.className = 'bg-dark';
+            const darkLabel = document.createElement('div');
+            darkLabel.className = 'bg-label';
+            darkLabel.textContent = 'Dark Background';
+            
+            // Create appropriate element based on file extension
+            if (ext === 'mp4') {
+                // Video element for MP4 files
+                const whiteVideo = document.createElement('div');
+                whiteVideo.className = 'video-container';
+                const whiteVideoEl = document.createElement('video');
+                whiteVideoEl.controls = true;
+                whiteVideoEl.loop = true;
+                whiteVideoEl.src = file;
+                whiteVideo.appendChild(whiteVideoEl);
+                whiteBg.appendChild(whiteVideo);
+                
+                const darkVideo = document.createElement('div');
+                darkVideo.className = 'video-container';
+                const darkVideoEl = document.createElement('video');
+                darkVideoEl.controls = true;
+                darkVideoEl.loop = true;
+                darkVideoEl.src = file;
+                darkVideo.appendChild(darkVideoEl);
+                darkBg.appendChild(darkVideo);
+            } else {
+                // Image element for other files
+                const whiteImg = document.createElement('img');
+                whiteImg.src = file;
+                whiteImg.alt = `${file} on white background`;
+                whiteBg.appendChild(whiteImg);
+                
+                const darkImg = document.createElement('img');
+                darkImg.src = file;
+                darkImg.alt = `${file} on dark background`;
+                darkBg.appendChild(darkImg);
+            }
+            
+            whiteSection.appendChild(whiteBg);
+            whiteSection.appendChild(whiteLabel);
+            
+            darkSection.appendChild(darkBg);
+            darkSection.appendChild(darkLabel);
+            
+            logoItem.appendChild(whiteSection);
+            logoItem.appendChild(darkSection);
+            
+            return logoItem;
+        }
+        
+        // Populate logo grids
+        const standardLogosGrid = document.getElementById('standard-logos');
+        standardLogos.forEach(file => {
+            standardLogosGrid.appendChild(createLogoItem(file));
+        });
+        
+        const rgbLogosGrid = document.getElementById('rgb-logos');
+        rgbLogos.forEach(file => {
+            rgbLogosGrid.appendChild(createLogoItem(file));
+        });
+        
+        const animationFilesGrid = document.getElementById('animation-files');
+        animationFiles.forEach(file => {
+            animationFilesGrid.appendChild(createLogoItem(file));
+        });
+        
+        // Toggle dark mode
+        const toggleDarkMode = document.getElementById('toggleDarkMode');
+        toggleDarkMode.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                document.body.style.backgroundColor = '#1e293b';
+                document.body.style.color = '#f1f5f9';
+                document.querySelector('.test-container').style.backgroundColor = '#0f172a';
+                document.querySelector('.test-container').style.color = '#f1f5f9';
+                document.querySelector('.controls').style.backgroundColor = '#1e293b';
+                document.querySelector('.controls').style.color = '#f1f5f9';
+            } else {
+                document.body.style.backgroundColor = '#f0f2f5';
+                document.body.style.color = '#1f2937';
+                document.querySelector('.test-container').style.backgroundColor = 'white';
+                document.querySelector('.test-container').style.color = '#1f2937';
+                document.querySelector('.controls').style.backgroundColor = 'white';
+                document.querySelector('.controls').style.color = '#1f2937';
+            }
+        });
+    </script>
+</body>
+</html>
+
