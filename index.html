@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeFace Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Base cyber-neon colors */
+            --neon-cyan: #00ffff;
+            --neon-blue: #0099ff;
+            --neon-purple: #cc00ff;
+            --neon-pink: #ff00cc;
+            --neon-orange: #ff9900;
+            
+            /* Light Theme Colors */
+            --primary-color: #06b6d4; /* Cyan-500 */
+            --primary-dark: #0891b2; /* Cyan-600 */
+            --accent-color: #a855f7; /* Purple-500 */
+            --bg-color: #f9fafb; /* Gray-50 */
+            --card-bg: #ffffff;
+            --sidebar-bg: #f0f9ff; /* Light blue for light theme */
+            --sidebar-hover: #e0f2fe;
+            --text-color: #1f2937; /* Gray-800 */
+            --text-light: #6b7280; /* Gray-500 */
+            --border-color: #e5e7eb;
+            --sidebar-text: #1e40af; /* Dark blue for sidebar text */
+        }
+        
+        body.dark-theme {
+            --primary-color: #0ea5e9; /* Sky-500 */
+            --primary-dark: #0284c7; /* Sky-600 */
+            --accent-color: #d946ef; /* Fuchsia-500 */
+            --bg-color: #0f172a; /* Slate-900 */
+            --card-bg: #1e293b; /* Slate-800 */
+            --sidebar-bg: #020617; /* Slate-950 */
+            --sidebar-hover: rgba(255, 255, 255, 0.1);
+            --text-color: #f1f5f9; /* Slate-100 */
+            --text-light: #94a3b8; /* Slate-400 */
+            --border-color: #334155; /* Slate-700 */
+            --sidebar-text: #f0f9ff; /* Light text for dark sidebar */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .app-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar Styles */
+        /* Sidebar Styles */
+        .sidebar {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 153, 255, 0.3);
+        }
+        
+        .sidebar-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--sidebar-text);
+        }
+        
+        .sidebar-title span {
+            color: var(--primary-color);
+        }
+        
+        .dark-theme .sidebar-title span {
+            background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .new-chat-btn {
+            padding: 10px 16px;
+            margin: 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-weight: 500;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+        }
+        
+        .new-chat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+        }
+        
+        .conversation-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+        
+        .conversation-item {
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            color: var(--sidebar-text);
+        }
+        
+        .conversation-item:hover {
+            background-color: var(--sidebar-hover);
+        }
+        
+        .conversation-item i {
+            color: var(--primary-color);
+        }
+        
+        .dark-theme .conversation-item i {
+            color: var(--neon-cyan);
+        }
+        
+        .sidebar-footer {
+            padding: 16px;
+            font-size: 12px;
+            color: var(--text-light);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-header {
+            padding: 16px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .theme-toggle:hover {
+            background-color: rgba(6, 182, 212, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .dark-theme .theme-toggle {
+            color: var(--neon-cyan);
+        }
+        
+        .dark-theme .theme-toggle:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+        
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: var(--bg-color);
+            transition: background-color 0.3s;
+        }
+        
+        .message-group {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .message {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .user-message {
+            background-color: #ecfeff;
+            margin-left: auto;
+            max-width: 80%;
+            color: #0c4a6e;
+        }
+        
+        .dark-theme .user-message {
+            background-color: #0c4a6e;
+            color: #ecfeff;
+            box-shadow: 0 0 10px rgba(0, 153, 255, 0.1);
+        }
+        
+        .ai-message {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            max-width: 80%;
+            color: var(--text-color);
+        }
+        
+        .dark-theme .ai-message {
+            background-color: var(--card-bg);
+            box-shadow: 0 0 10px rgba(204, 0, 255, 0.1);
+        }
+        
+        .avatar {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 8px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        }
+        
+        .ai-avatar {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+        }
+        
+        .dark-theme .ai-avatar {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            box-shadow: 0 0 10px rgba(204, 0, 255, 0.3);
+        }
+        
+        .dark-theme .user-avatar {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
+            box-shadow: 0 0 10px rgba(0, 153, 255, 0.3);
+        }
+        
+        .message-content {
+            flex: 1;
+        }
+        
+        .message-content pre {
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+            font-size: 14px;
+        }
+        
+        .dark-theme .message-content pre {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--neon-cyan);
+        }
+        
+        .message-content code {
+            font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .input-area {
+            padding: 16px;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s;
+        }
+        
+        .input-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .input-textarea {
+            width: 100%;
+            padding: 12px 50px 12px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            resize: none;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 15px;
+            line-height: 1.5;
+            max-height: 200px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        .input-textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.1);
+        }
+        
+        .dark-theme .input-textarea:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+        
+        .send-btn {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+        }
+        
+        .dark-theme .send-btn {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+        
+        .dark-theme .send-btn:hover {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+        
+        /* Animation for the dots */
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        
+        /* Dark mode scan line effect */
+        .dark-theme .chat-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(0deg, transparent 0%, var(--neon-cyan) 50%, transparent 100%);
+            opacity: 0.01;
+            background-size: 100% 10px;
+            pointer-events: none;
+            animation: scanLine 8s linear infinite;
+        }
+        
+        @keyframes scanLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                max-height: 60px;
+                overflow: hidden;
+                transition: max-height 0.3s;
+            }
+            
+            .sidebar.expanded {
+                max-height: 100vh;
+            }
+            
+            .conversation-list {
+                padding-top: 60px;
+            }
+            
+            .sidebar-header {
+                position: fixed;
+                width: 100%;
+                z-index: 10;
+                background-color: var(--sidebar-bg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo">CF</div>
+                    <div class="sidebar-title">CODE<span>FACE</span></div>
+                </div>
+            </div>
+            
+            <button class="new-chat-btn">
+                <i class="fas fa-plus"></i> New Chat
+            </button>
+            
+            <div class="conversation-list">
+                <div class="conversation-item">
+                    <i class="fas fa-message"></i>
+                    <span>Welcome to CodeFace</span>
+                </div>
+                <div class="conversation-item">
+                    <i class="fas fa-message"></i>
+                    <span>How to implement a theme toggle</span>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                CodeFace - Modern AI Chat Interface
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="chat-header">
+                <h2>CodeFace Chat</h2>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
+            <div class="chat-container">
+                <div class="message-group">
+                    <!-- AI Welcome Message -->
+                    <div class="message ai-message">
+                        <div class="avatar ai-avatar">CF</div>
+                        <div class="message-content">
+                            Welcome to CodeFace! I'm your AI assistant. How can I help you today?
+                        </div>
+                    </div>
+                    
+                    <!-- User Message -->
+                    <div class="message user-message">
+                        <div class="avatar user-avatar">You</div>
+                        <div class="message-content">
+                            Can you help me implement a dark theme for my website?
+                        </div>
+                    </div>
+                    
+                    <!-- AI Response with code -->
+                    <div class="message ai-message">
+                        <div class="avatar ai-avatar">CF</div>
+                        <div class="message-content">
+                            <p>Sure! Here's a simple implementation of a dark theme toggle using CSS variables:</p>
+                            <pre>// CSS Variables
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+}
+
+body.dark-theme {
+  --bg-color: #1a1a1a;
+  --text-color: #f0f0f0;
+}
+
+// JavaScript Toggle
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+});</pre>
+                            <p>You can click the moon/sun icon in the header to test it out!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-area">
+                <div class="input-container">
+                    <textarea class="input-textarea" placeholder="Type your message here..."></textarea>
+                    <button class="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('codeface-theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            // Update icon
+            if (document.body.classList.contains('dark-theme')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('codeface-theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('codeface-theme', 'light');
+            }
+        });
+        
+        // Mobile sidebar toggle
+        const sidebar = document.querySelector('.sidebar');
+        const logoContainer = document.querySelector('.logo-container');
+        
+        logoContainer.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.toggle('expanded');
+            }
+        });
+        
+        // Text area auto-resize
+        const textarea = document.querySelector('.input-textarea');
+        textarea.addEventListener('input', () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`;
+        });
+        
+        // Send message on Enter (not Shift+Enter)
+        textarea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                document.querySelector('.send-btn').click();
+            }
+        });
+        
+        // Send button click
+        document.querySelector('.send-btn').addEventListener('click', () => {
+            const text = textarea.value.trim();
+            if (text) {
+                // Create and add user message
+                const messageGroup = document.querySelector('.message-group');
+                
+                // User message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user-message';
+                userMessage.innerHTML = `
+                    <div class="avatar user-avatar">You</div>
+                    <div class="message-content">${text}</div>
+                `;
+                messageGroup.appendChild(userMessage);
+                
+                // AI thinking delay
+                setTimeout(() => {
+                    // AI response
+                    const aiMessage = document.createElement('div');
+                    aiMessage.className = 'message ai-message';
+                    aiMessage.innerHTML = `
+                        <div class="avatar ai-avatar">CF</div>
+                        <div class="message-content">
+                            <p>I've received your message: "${text}"</p>
+                            <p>This is a demo implementation. In a real application, this would connect to an AI backend for responses.</p>
+                        </div>
+                    `;
+                    messageGroup.appendChild(aiMessage);
+                    
+                    // Scroll to bottom
+                    document.querySelector('.chat-container').scrollTop = document.querySelector('.chat-container').scrollHeight;
+                }, 1000);
+                
+                // Clear input
+                textarea.value = '';
+                textarea.style.height = 'auto';
+                
+                // Scroll to bottom
+                document.querySelector('.chat-container').scrollTop = document.querySelector('.chat-container').scrollHeight;
+            }
+        });
+        
+        // New chat button functionality
+        document.querySelector('.new-chat-btn').addEventListener('click', () => {
+            // Clear chat
+            document.querySelector('.message-group').innerHTML = '';
+            
+            // Add welcome message
+            const messageGroup = document.querySelector('.message-group');
+            const welcomeMessage = document.createElement('div');
+            welcomeMessage.className = 'message ai-message';
+            welcomeMessage.innerHTML = `
+                <div class="avatar ai-avatar">CF</div>
+                <div class="message-content">
+                    This is a new conversation. How can I help you today?
+                </div>
+            `;
+            messageGroup.appendChild(welcomeMessage);
+            
+            // Add new conversation to sidebar
+            const conversationList = document.querySelector('.conversation-list');
+            const newConversation = document.createElement('div');
+            newConversation.className = 'conversation-item';
+            newConversation.innerHTML = `
+                <i class="fas fa-message"></i>
+                <span>New Conversation</span>
+            `;
+            conversationList.prepend(newConversation);
+            
+            // Clear input
+            document.querySelector('.input-textarea').value = '';
+            document.querySelector('.input-textarea').style.height = 'auto';
+            
+            // Scroll to bottom
+            document.querySelector('.chat-container').scrollTop = document.querySelector('.chat-container').scrollHeight;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+</head>
+<body>
+    <h1>Testing Image Path</h1>
+    <img src="public/logos/logo.png" alt="Logo Test" style="border: 2px solid red; width: 100px;">
+    <p>If you can see the image above, the path is correct.</p>
+    
+    <h2>Alternative paths to try:</h2>
+    <div>
+        <p>Path with leading slash:</p>
+        <img src="/public/logos/logo.png" alt="Logo Test" style="border: 2px solid blue; width: 100px;">
+    </div>
+    
+    <div>
+        <p>Path without public:</p>
+        <img src="logos/logo.png" alt="Logo Test" style="border: 2px solid green; width: 100px;">
+    </div>
+    
+    <div>
+        <p>Path from root without public:</p>
+        <img src="/logos/logo.png" alt="Logo Test" style="border: 2px solid purple; width: 100px;">
+    </div>
+    
+    <div>
+        <p>Check if SVG works:</p>
+        <img src="public/logos/logo.svg" alt="Logo SVG Test" style="border: 2px solid orange; width: 100px;">
+    </div>
+</body>
+</html>
+

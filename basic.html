@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic CodeFace Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f9ff;
+            color: #0c4a6e;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0ea5e9;
+            text-align: center;
+        }
+        .box {
+            background: #0c4a6e;
+            color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        button {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CodeFace Basic Test</h1>
+        <p>If you can see this page, basic HTML and CSS are working correctly.</p>
+        
+        <div class="box">
+            This is a styled box showing that CSS is working.
+        </div>
+        
+        <button onclick="alert('Button clicked!')">Click Me</button>
+        
+        <p>This page doesn't use React, Babel, or any external libraries. It's a simple HTML/CSS page with minimal JavaScript.</p>
+    </div>
+    
+    <script>
+        // Directly add content to verify JS is working
+        document.body.insertAdjacentHTML('beforeend', `
+            <div class="container" style="margin-top: 20px;">
+                <h2>JavaScript is working!</h2>
+                <p>This content was added by JavaScript after the page loaded.</p>
+                <p>Current time: ${new Date().toLocaleTimeString()}</p>
+            </div>
+        `);
+    </script>
+</body>
+</html>
+
