@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeFace Chat</title>
+    <link rel="icon" type="image/x-icon" href="public/logos/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,14 +96,9 @@
         .logo {
             width: 40px;
             height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-cyan));
-            color: white;
-            font-weight: bold;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 153, 255, 0.3);
+            object-fit: contain;
+            border-radius: 0;
+            transition: all 0.3s;
         }
         
         .sidebar-title {
@@ -468,7 +464,7 @@
         <div class="sidebar">
             <div class="sidebar-header">
                 <div class="logo-container">
-                    <div class="logo">CF</div>
+                    <img src="public/logos/logo.svg" alt="CodeFace Logo" class="logo" style="width: 40px; height: 40px; box-shadow: none; background: none;">
                     <div class="sidebar-title">CODE<span>FACE</span></div>
                 </div>
             </div>
