@@ -1,0 +1,57 @@
+{
+  "name": "@codeface/core",
+  "version": "1.0.0",
+  "description": "Core functionality for CodeFace - Modern AI Chat Interface for developers",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --mode production",
+    "start": "webpack serve --mode development",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TelxeyLabs/CodeFace-Core.git"
+  },
+  "keywords": [
+    "ai",
+    "chat",
+    "code",
+    "development",
+    "interface",
+    "react"
+  ],
+  "author": "TelxeyLabs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TelxeyLabs/CodeFace-Core/issues"
+  },
+  "homepage": "https://github.com/TelxeyLabs/CodeFace-Core#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "marked": "^4.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.8.1",
+    "eslint": "^8.43.0",
+    "eslint-plugin-react": "^7.32.2",
+    "jest": "^29.5.0",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
+
