@@ -1,0 +1,22 @@
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @TelxeyLabs/maintainers will be requested for
+# review when someone opens a pull request.
+*       @TelxeyLabs/maintainers
+
+# Backend-specific files
+*.js    @TelxeyLabs/backend
+
+# Frontend-specific files
+*.html  @TelxeyLabs/frontend
+*.css   @TelxeyLabs/frontend
+
+# Configuration files
+*.json  @TelxeyLabs/devops
+*.yml   @TelxeyLabs/devops
+*.yaml  @TelxeyLabs/devops
+
+# Documentation
+/docs/  @TelxeyLabs/docs
+*.md    @TelxeyLabs/docs
+
