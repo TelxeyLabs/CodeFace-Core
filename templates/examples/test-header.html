@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Base variables */
+        :root {
+            --neon-purple: #cc00ff;
+            --neon-pink: #ff00cc;
+            --neon-cyan: #00ffff;
+            --neon-blue: #0099ff;
+        }
+
+        /* Logo styles */
+        .logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 0;
+            background: none;
+            filter: drop-shadow(0 0 20px var(--neon-cyan)) 
+                    drop-shadow(0 0 25px var(--neon-blue));
+            transition: all 0.3s;
+        }
+
+        /* Header title */
+        .ai-title {
+            font-family: 'Hack', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(204, 0, 255, 0.3);
+            animation: colorPulse 5s infinite;
+        }
+
+        @keyframes colorPulse {
+            0% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+            100% { filter: hue-rotate(0deg); }
+        }
+
+        /* Layout */
+        .chat-header {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Test the layout -->
+    <div class="chat-header">
+        <div class="ai-title">CodeFace AI</div>
+        <button class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <div class="logo-container">
+        <img src="public/logos/logo-rgb.svg" alt="CodeFace Logo" class="logo">
+    </div>
+</body>
+</html>
+
