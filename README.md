@@ -1,3 +1,75 @@
+# CodeFace-Core
+
+## Overview
+CodeFace-Core is the open-source foundation of CodeFace, a modern, efficient interface for code development and AI-assisted programming. This repository contains the core components that power the CodeFace platform, made available to the community to extend, enhance, and build upon.
+
+## Core Features
+- 🚀 Modern React-based UI components for code editing environments
+- 🤖 AI message interface components with customizable themes
+- 🔄 Real-time collaboration primitives
+- 🎨 Themeable interface with light/dark mode support
+- ⚙️ Core state management utilities
+- 📝 Extensible editor integration framework
+
+## Installation
+
+### Prerequisites
+- Node.js 16.x or higher
+- npm 8.x or higher
+
+### Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/TelxeyLabs/CodeFace-Core.git
+cd CodeFace-Core
+
+# Install dependencies
+npm install
+
+# Build the core libraries
+npm run build
+
+# Run development server
+npm run dev
+```
+
+### Using as a Dependency
+
+```bash
+npm install @telxeylabs/codeface-core
+```
+
+Then import components in your project:
+
+```javascript
+import { CodeEditor, AIMessageBox } from '@telxeylabs/codeface-core';
+```
+
+## Contributing
+
+We welcome contributions to CodeFace-Core! Here's how you can help:
+
+1. **Fork the repository** and create your feature branch from `main`
+2. **Install dependencies** with `npm install`
+3. **Make your changes** and add tests if applicable
+4. **Run tests** with `npm test` to ensure everything works
+5. **Submit a pull request** with a clear description of your changes
+
+Please read our [Contributing Guidelines](./CONTRIBUTING.md) for more details.
+
+## Documentation
+
+For more detailed documentation, please visit our [Wiki](https://github.com/TelxeyLabs/CodeFace-Core/wiki).
+
+## License
+
+CodeFace-Core is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+## Sponsorship
+
+If you find CodeFace-Core useful, please consider supporting its development through [GitHub Sponsors](https://github.com/sponsors/TelxeyLabs).
+
 <div align="center">
   <img src="public/logos/logo.gif" alt="CodeFace Logo" width="150px" />
   <h1>CodeFace</h1>
@@ -54,6 +126,8 @@ Support CodeFace development and gain access to premium features:
 4. Instantly unlock premium features across all your devices
 
 *Note: Your sponsorship directly supports open-source development and helps us maintain both free and premium versions.*
+
+<!-- This comment is no longer needed as we've replaced the placeholder -->
 
 ## Quick Links
 
@@ -119,7 +193,7 @@ Detailed implementation documentation is available in the following files:
 ### Project Setup
 ```bash
 # Clone the repository
-git clone https://github.com/Telxey/CodeFace.git
+git clone https://github.com/TelxeyLabs/CodeFace.git
 
 # Navigate to the project directory
 cd CodeFace

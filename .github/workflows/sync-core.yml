@@ -1,0 +1,55 @@
+name: Sync Core Features
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+  
+  # Scheduled sync (adjust as needed)
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday at midnight UTC
+
+jobs:
+  sync-core:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout CodeFace-Core repository
+        uses: actions/checkout@v3
+        with:
+          repository: TelxeyLabs/CodeFace-Core
+          token: ${{ secrets.SYNC_TOKEN }}
+          path: public-repo
+
+      - name: Checkout private repository
+        uses: actions/checkout@v3
+        with:
+          repository: TelxeyLabs/CodeFace
+          token: ${{ secrets.SYNC_TOKEN }}
+          path: private-repo
+      
+      # Placeholder for actual sync logic
+      # This will need to be customized based on the actual directory structure
+      # and which specific files/directories should be synced
+      - name: Sync core features
+        run: |
+          echo "This is a placeholder for the actual sync logic."
+          echo "You'll need to implement the specific copy commands"
+          echo "to move files from the private repo to the public repo."
+          
+          # Example sync logic (to be customized)
+          # cp -r private-repo/src/core/* public-repo/src/
+          
+      - name: Commit and push changes if any
+        working-directory: ./public-repo
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          
+          if git diff --exit-code; then
+            echo "No changes to commit"
+          else
+            git add .
+            git commit -m "Sync core features from private repository"
+            git push
+          fi
+
