@@ -1,0 +1,74 @@
+name: Branch Protection
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Run on the first of every month at 00:00 UTC
+    - cron: '0 0 1 * *'
+
+jobs:
+  protect-branches:
+    name: Setup Branch Protection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Branch Protection
+        uses: relaxdiego/branch-protection@v0
+        with:
+          github-token: ${{ secrets.ADMIN_TOKEN }}
+          repository: ${{ github.repository }}
+          branch: 'main'
+          enforce-admins: true
+          required-status-checks: |
+            [
+              {
+                "context": "lint",
+                "strict": true
+              },
+              {
+                "context": "test",
+                "strict": true
+              },
+              {
+                "context": "build",
+                "strict": true
+              }
+            ]
+          required-pull-request-reviews: |
+            {
+              "required_approving_review_count": 1,
+              "dismiss_stale_reviews": true,
+              "require_code_owner_reviews": true
+            }
+          restrictions: ""
+
+      - name: Setup Develop Branch Protection
+        uses: relaxdiego/branch-protection@v0
+        with:
+          github-token: ${{ secrets.ADMIN_TOKEN }}
+          repository: ${{ github.repository }}
+          branch: 'develop'
+          enforce-admins: false
+          required-status-checks: |
+            [
+              {
+                "context": "lint",
+                "strict": true
+              },
+              {
+                "context": "test",
+                "strict": true
+              }
+            ]
+          required-pull-request-reviews: |
+            {
+              "required_approving_review_count": 1,
+              "dismiss_stale_reviews": true
+            }
+          restrictions: ""
+
+# Note: This workflow requires a secret named ADMIN_TOKEN with admin:org permissions
+# to be created in the repository settings
+
