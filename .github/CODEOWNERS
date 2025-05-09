@@ -1,0 +1,35 @@
+# CodeFace CODEOWNERS file
+# Each line is a file pattern followed by one or more owners.
+# Order is important; the last matching pattern takes precedence.
+# For more information, see: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+*                 @project-admin
+
+# Core application files
+app.js            @core-dev-team
+components.js     @core-dev-team
+theme-context.js  @core-dev-team
+*.html            @frontend-team
+styles.css        @frontend-team
+
+# Documentation ownership
+docs/             @docs-team
+docs/architecture/  @architecture-team @docs-team
+docs/implementation/ @implementation-team @docs-team
+docs/roadmap/     @project-manager @docs-team
+README.md         @project-admin @docs-team
+
+# Public assets
+public/           @frontend-team
+public/logos/     @design-team @frontend-team
+
+# Templates
+templates/        @frontend-team
+
+# Configuration files
+.gitignore        @devops-team
+
+# If we add workflows later
+.github/workflows/ @devops-team
+
