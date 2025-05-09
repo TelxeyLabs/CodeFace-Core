@@ -1,0 +1,17 @@
+# CodeFace Core CODEOWNERS
+# Each line is a file pattern followed by one or more owners.
+
+# Default owners for everything in the repo
+*                   @TelxeyLabs/core-team
+
+# Core components
+/src/              @TelxeyLabs/core-team
+*.js               @TelxeyLabs/core-team
+
+# Documentation
+/docs/             @TelxeyLabs/docs-team
+README.md          @TelxeyLabs/docs-team
+
+# Build and configuration
+*.json             @TelxeyLabs/devops-team
+.github/workflows/ @TelxeyLabs/devops-team
