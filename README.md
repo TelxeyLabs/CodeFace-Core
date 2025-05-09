@@ -14,8 +14,52 @@ CodeFace is a modern AI chat interface specifically designed for code-related di
 - Mobile-responsive design
 - WebSocket-based real-time updates
 
+## Open-Source vs Premium Features
+
+CodeFace offers both open-source and premium features to serve different user needs:
+
+### Open-Source Features (Free)
+- Basic chat interface with AI assistance
+- Standard code syntax highlighting
+- Light/dark theme switching
+- Basic keyboard shortcuts
+- Limited message history
+- Community support
+
+### Premium Features
+- Advanced AI model integrations
+- Enhanced syntax highlighting with additional languages
+- Context-aware code completion
+- Extended message history and conversation management
+- Priority support and feature requests
+- Custom theme options
+- Terminal and tmux integration
+- Rust-optimized performance features
+
+## Sponsorship Options
+
+Support CodeFace development and gain access to premium features:
+
+### GitHub Sponsors
+- **Coder Tier ($5/month)**: Access to all premium features
+- **Developer Tier ($10/month)**: Premium features + priority support
+- **Maintainer Tier ($25/month)**: All benefits + early access to new features
+- **Enterprise Tier (Contact us)**: Custom deployment and integration support
+
+### How to Access Premium Features
+
+1. Become a sponsor through [GitHub Sponsors](https://github.com/sponsors/TelxeyLabs)
+2. Receive a unique access token via email
+3. Enter your token in the CodeFace settings page
+4. Instantly unlock premium features across all your devices
+
+*Note: Your sponsorship directly supports open-source development and helps us maintain both free and premium versions.*
+
 ## Quick Links
 
+- [Open-Source vs Premium Features](#open-source-vs-premium-features)
+- [Sponsorship Options](#sponsorship-options)
+- [How to Access Premium Features](#how-to-access-premium-features)
 - [Implementation Guide](#implementation-guide)
 - [Current Implementation](#current-implementation)
 - [Planned Implementation](#planned-implementation)
@@ -216,7 +260,17 @@ This project follows GitFlow branching strategy:
 
 ## License
 
-Private - All rights reserved.
+CodeFace is available under a dual licensing model:
+
+### Open-Source Version
+- MIT License - See [LICENSE-MIT](./LICENSE-MIT) for details
+- Free for personal and commercial use
+- Contributions welcome under the same license
+
+### Premium Version
+- Proprietary License - All rights reserved
+- Available exclusively to sponsors
+- Includes advanced features and priority support
 
 ## Support
 

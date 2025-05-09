@@ -1,0 +1,97 @@
+# CodeFace Premium License Agreement
+
+## PROPRIETARY SOFTWARE LICENSE
+
+**Effective Date:** May 9, 2025
+
+This Premium License Agreement (the "Agreement") is a legal agreement between you (either an individual or a single entity, referred to herein as "Licensee") and CodeFace (referred to herein as "Licensor") for the CodeFace Premium software product identified above, which includes computer software and may include associated media, printed materials, and "online" or electronic documentation ("Software Product").
+
+## 1. GRANT OF LICENSE
+
+### 1.1 Sponsor-Only Access
+The Software Product is only available to active sponsors of the CodeFace project, as defined by GitHub Sponsors or other sponsorship mechanisms designated by Licensor. Access to the Software Product is granted exclusively to individuals or entities who maintain an active sponsorship at or above the required tier level.
+
+### 1.2 Subscription-Based Access
+Access to the Software Product is provided on a subscription basis for the duration of an active sponsorship. Termination or downgrading of the sponsorship below the required tier will immediately revoke all rights granted under this license.
+
+### 1.3 Usage Rights
+Subject to the terms and conditions of this Agreement and valid sponsorship status, Licensor hereby grants Licensee a non-exclusive, non-transferable, revocable license to use the Software Product.
+
+## 2. DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS
+
+### 2.1 Separation of Components
+The Software Product is licensed as a single product. Its component parts may not be separated for use on more than one computer or for any purpose outside the scope of this license.
+
+### 2.2 No Redistribution
+Licensee may not redistribute, share, sublicense, lease, sell, or otherwise transfer rights to the Software Product, in whole or in part, to any third party.
+
+### 2.3 No Modifications or Derivative Works
+Licensee may not modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works based on the Software Product.
+
+### 2.4 No Commercial Use
+The Software Product may not be used for commercial purposes, including but not limited to selling, licensing, or using the Software Product to provide services to third parties, without explicit written permission from Licensor.
+
+### 2.5 Distinction from Open-Source Components
+This license applies exclusively to the premium components of the CodeFace project. The core components of CodeFace are separately licensed under an open-source license available at [LICENSE](./LICENSE).
+
+## 3. INTELLECTUAL PROPERTY RIGHTS
+
+All title, ownership rights, and intellectual property rights in and to the Software Product, including but not limited to any content, images, photographs, animations, video, audio, music, text, and "applets" incorporated into the Software Product, and any copies of the Software Product, are owned by Licensor. The Software Product is protected by copyright laws and international treaty provisions. Therefore, Licensee must treat the Software Product like any other copyrighted material.
+
+## 4. TERMINATION
+
+### 4.1 Termination for Cause
+Without prejudice to any other rights, Licensor may terminate this Agreement if Licensee fails to comply with the terms and conditions of this Agreement. In such event, Licensee must immediately cease all use of the Software Product and destroy all copies of the Software Product in Licensee's possession.
+
+### 4.2 Termination on Sponsorship Cessation
+This Agreement will automatically terminate when Licensee's sponsorship of the CodeFace project ends or falls below the required tier level. Upon such termination, all rights granted under this license will immediately cease, and Licensee must immediately cease all use of the Software Product and destroy all copies of the Software Product in Licensee's possession.
+
+### 4.3 Effect of Termination
+Upon termination of this Agreement for any reason:
+- All rights granted to Licensee under this Agreement shall cease;
+- Licensee must cease all activities authorized by this Agreement;
+- Licensee must immediately delete or remove the Software Product from all computer equipment in Licensee's possession or control; and
+- Licensee must immediately destroy or return to Licensor all copies of the Software Product then in Licensee's possession, custody, or control.
+
+## 5. WARRANTIES AND DISCLAIMERS
+
+### 5.1 No Warranties
+THE SOFTWARE PRODUCT IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NONINFRINGEMENT. LICENSOR DOES NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE SOFTWARE PRODUCT WILL MEET LICENSEE'S REQUIREMENTS OR THAT THE OPERATION OF THE SOFTWARE PRODUCT WILL BE UNINTERRUPTED OR ERROR-FREE.
+
+### 5.2 No Liability for Damages
+IN NO EVENT SHALL LICENSOR BE LIABLE FOR ANY DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF THE USE OF OR INABILITY TO USE THE SOFTWARE PRODUCT, EVEN IF LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+## 6. LIMITATION OF LIABILITY
+
+### 6.1 Limitation of Remedies
+REGARDLESS OF WHETHER ANY REMEDY SET FORTH HEREIN FAILS OF ITS ESSENTIAL PURPOSE, IN NO EVENT WILL LICENSOR BE LIABLE TO LICENSEE FOR ANY INCIDENTAL, CONSEQUENTIAL, INDIRECT, SPECIAL, PUNITIVE, OR EXEMPLARY DAMAGES OF ANY KIND (INCLUDING LOST REVENUES OR PROFITS, LOSS OF BUSINESS, LOSS OF DATA, OR COST OF SUBSTITUTE GOODS OR SERVICES) ARISING OUT OF THIS AGREEMENT OR THE USE OF OR INABILITY TO USE THE SOFTWARE PRODUCT, WHETHER BASED ON CONTRACT, WARRANTY, TORT (INCLUDING NEGLIGENCE), STRICT LIABILITY, OR OTHERWISE, EVEN IF LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+### 6.2 Cap on Liability
+LICENSOR'S TOTAL LIABILITY TO LICENSEE FROM ALL CAUSES OF ACTION AND UNDER ALL THEORIES OF LIABILITY WILL BE LIMITED TO AND WILL NOT EXCEED THE AMOUNTS PAID BY LICENSEE TO LICENSOR IN SPONSORSHIP FEES DURING THE TWELVE (12) MONTHS PRIOR TO THE ACT THAT GAVE RISE TO THE LIABILITY.
+
+## 7. GENERAL PROVISIONS
+
+### 7.1 Governing Law
+This Agreement shall be governed by and construed in accordance with the laws of the jurisdiction in which Licensor is located, without giving effect to any principles of conflicts of law.
+
+### 7.2 Dispute Resolution
+Any dispute arising out of or relating to this Agreement shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association or an equivalent body in Licensor's jurisdiction.
+
+### 7.3 Severability
+If any provision of this Agreement is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.
+
+### 7.4 No Waiver
+The failure of Licensor to enforce any right or provision of this Agreement will not be deemed a waiver of such right or provision.
+
+### 7.5 Entire Agreement
+This Agreement constitutes the entire agreement between Licensee and Licensor regarding the Software Product and supersedes all prior and contemporaneous agreements, proposals, or representations, written or oral, concerning its subject matter.
+
+## 8. CONTACT INFORMATION
+
+If you have any questions about this Agreement, or if you want to contact Licensor for any reason, please direct all correspondence to:
+
+CodeFace
+GitHub: https://github.com/Telxey/CodeFace
+Email: support@codeface.dev
+
+By becoming a sponsor and accessing the Software Product, you acknowledge that you have read this Agreement, understand it, and agree to be bound by its terms and conditions.
