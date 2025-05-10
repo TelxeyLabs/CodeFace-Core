@@ -4,31 +4,52 @@
 # For more information, see: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Default owners for everything in the repo
-*                 @TelxeyLabs
+*                 @TelxeyLabs/project-manager
 
 # Core application files
-app.js            @TelxeyLabs
-components.js     @TelxeyLabs
-theme-context.js  @TelxeyLabs
-*.html            @TelxeyLabs
-styles.css        @TelxeyLabs
+app.js            @TelxeyLabs/core-dev-team
+components.js     @TelxeyLabs/core-dev-team
+theme-context.js  @TelxeyLabs/core-dev-team @TelxeyLabs/frontend-team
+*.jsx             @TelxeyLabs/core-dev-team @TelxeyLabs/frontend-team
+*.js              @TelxeyLabs/core-dev-team
+
+# Frontend files
+*.html            @TelxeyLabs/frontend-team
+*.css             @TelxeyLabs/frontend-team @TelxeyLabs/design-team
+styles.css        @TelxeyLabs/frontend-team @TelxeyLabs/design-team
+**/components/    @TelxeyLabs/frontend-team
 
 # Documentation ownership
-docs/             @TelxeyLabs
-docs/architecture/  @TelxeyLabs
-docs/implementation/ @TelxeyLabs
-docs/roadmap/     @TelxeyLabs
-README.md         @TelxeyLabs
+docs/             @TelxeyLabs/docs-team
+docs/architecture/  @TelxeyLabs/architecture-team @TelxeyLabs/docs-team
+docs/implementation/ @TelxeyLabs/implementation-team @TelxeyLabs/docs-team
+docs/roadmap/     @TelxeyLabs/project-manager @TelxeyLabs/docs-team
+README.md         @TelxeyLabs/project-manager @TelxeyLabs/docs-team
 
 # Public assets
-public/           @TelxeyLabs
-public/logos/     @TelxeyLabs
+public/           @TelxeyLabs/frontend-team
+public/logos/     @TelxeyLabs/design-team @TelxeyLabs/frontend-team
+public/images/    @TelxeyLabs/design-team
+public/assets/    @TelxeyLabs/design-team
 
 # Templates
-templates/        @TelxeyLabs
+templates/        @TelxeyLabs/frontend-team
 
 # Configuration files
-.gitignore        @TelxeyLabs
+.gitignore        @TelxeyLabs/devops-team
+*.config.js       @TelxeyLabs/devops-team @TelxeyLabs/core-dev-team
+*.json            @TelxeyLabs/devops-team @TelxeyLabs/core-dev-team
+package.json      @TelxeyLabs/core-dev-team @TelxeyLabs/devops-team
 
-# GitHub workflows
-.github/workflows/ @TelxeyLabs
+# GitHub workflows and CI/CD
+.github/          @TelxeyLabs/devops-team
+.github/workflows/ @TelxeyLabs/devops-team
+
+# Testing
+**/__tests__/     @TelxeyLabs/core-dev-team
+**/*.test.js      @TelxeyLabs/core-dev-team
+**/*.spec.js      @TelxeyLabs/core-dev-team
+
+# Backend & API
+api/              @TelxeyLabs/core-dev-team @TelxeyLabs/implementation-team
+server/           @TelxeyLabs/core-dev-team @TelxeyLabs/implementation-team
