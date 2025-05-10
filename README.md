@@ -1,4 +1,7 @@
-# CodeFace-Core
+<div align="center">
+  <img src="public/logos/logo-rgb.gif" alt="CodeFace Logo" width="150px" />
+  <h1>CodeFace</h1>
+</div>
 
 ## Overview
 CodeFace-Core is the open-source foundation of CodeFace, a modern, efficient interface for code development and AI-assisted programming. This repository contains the core components that power the CodeFace platform, made available to the community to extend, enhance, and build upon.
