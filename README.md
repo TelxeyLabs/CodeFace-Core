@@ -30,4 +30,3 @@ Contributions to the core features are welcome! Please see the main project READ
 ## License
 
 The core features are available under the MIT License. See LICENSE-MIT in the project root for details.
-
