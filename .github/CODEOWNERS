@@ -4,32 +4,31 @@
 # For more information, see: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Default owners for everything in the repo
-*                 @project-admin
+*                 @TelxeyLabs
 
 # Core application files
-app.js            @core-dev-team
-components.js     @core-dev-team
-theme-context.js  @core-dev-team
-*.html            @frontend-team
-styles.css        @frontend-team
+app.js            @TelxeyLabs
+components.js     @TelxeyLabs
+theme-context.js  @TelxeyLabs
+*.html            @TelxeyLabs
+styles.css        @TelxeyLabs
 
 # Documentation ownership
-docs/             @docs-team
-docs/architecture/  @architecture-team @docs-team
-docs/implementation/ @implementation-team @docs-team
-docs/roadmap/     @project-manager @docs-team
-README.md         @project-admin @docs-team
+docs/             @TelxeyLabs
+docs/architecture/  @TelxeyLabs
+docs/implementation/ @TelxeyLabs
+docs/roadmap/     @TelxeyLabs
+README.md         @TelxeyLabs
 
 # Public assets
-public/           @frontend-team
-public/logos/     @design-team @frontend-team
+public/           @TelxeyLabs
+public/logos/     @TelxeyLabs
 
 # Templates
-templates/        @frontend-team
+templates/        @TelxeyLabs
 
 # Configuration files
-.gitignore        @devops-team
+.gitignore        @TelxeyLabs
 
-# If we add workflows later
-.github/workflows/ @devops-team
-
+# GitHub workflows
+.github/workflows/ @TelxeyLabs
