@@ -5,6 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { marked } from 'marked';
+import PropTypes from 'prop-types';
 
 // Import theme context
 import { ThemeContext, ThemeProvider } from '../theme-context.js';
@@ -48,8 +49,12 @@ const Sidebar = ({ conversations, activeConversationId, onSelectConversation, on
                     <div className="sidebar-title">CODE<span>FACE</span></div>
                 </div>
             </div>
-            <button className="new-chat-btn" onClick={onNewChat}>
-                <i className="fas fa-plus"></i> New Chat
+            <button 
+                className="new-chat-btn" 
+                onClick={onNewChat}
+                aria-label="Create new chat"
+            >
+                <i className="fas fa-plus" aria-hidden="true"></i> New Chat
             </button>
             <div className="conversation-list">
                 {conversations.map(conv => (
@@ -57,8 +62,17 @@ const Sidebar = ({ conversations, activeConversationId, onSelectConversation, on
                         key={conv.id} 
                         className={`conversation-item ${conv.id === activeConversationId ? 'active' : ''}`}
                         onClick={() => onSelectConversation(conv.id)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                onSelectConversation(conv.id);
+                            }
+                        }}
+                        tabIndex="0"
+                        role="button"
+                        aria-pressed={conv.id === activeConversationId}
                     >
-                        <i className="fas fa-message conversation-icon"></i>
+                        <i className="fas fa-message conversation-icon" aria-hidden="true"></i>
                         <div className="conversation-title">{conv.title}</div>
                     </div>
                 ))}
@@ -73,8 +87,13 @@ const Sidebar = ({ conversations, activeConversationId, onSelectConversation, on
 // Main content toggle button for mobile
 const SidebarToggle = ({ toggleSidebar, isSidebarOpen }) => {
     return (
-        <button className="sidebar-toggle" onClick={toggleSidebar}>
-            <i className={`fas ${isSidebarOpen ? 'fa-times' : 'fa-bars'}`}></i>
+        <button 
+            className="sidebar-toggle" 
+            onClick={toggleSidebar}
+            aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
+            aria-expanded={isSidebarOpen}
+        >
+            <i className={`fas ${isSidebarOpen ? 'fa-times' : 'fa-bars'}`} aria-hidden="true"></i>
         </button>
     );
 };
@@ -139,8 +158,19 @@ const Message = ({ message, onCopy }) => {
                 dangerouslySetInnerHTML={{ __html: marked.parse(message.content) }} 
             />
             <div className="message-actions">
-                <button className="copy-btn" onClick={copyMessage}>
-                    <i className="fas fa-copy"></i>
+                <button 
+                    className="copy-btn" 
+                    onClick={copyMessage}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            copyMessage();
+                        }
+                    }}
+                    aria-label="Copy message to clipboard"
+                    tabIndex="0"
+                >
+                    <i className="fas fa-copy" aria-hidden="true"></i>
                 </button>
             </div>
         </div>
@@ -220,8 +250,9 @@ const ChatInput = ({
                         className="send-btn" 
                         onClick={onSendMessage}
                         disabled={isWaitingForResponse || !inputValue.trim()}
+                        aria-label="Send message"
                     >
-                        <i className="fas fa-paper-plane"></i>
+                        <i className="fas fa-paper-plane" aria-hidden="true"></i>
                     </button>
                 </div>
                 
@@ -341,5 +372,279 @@ const App = () => {
     }, [activeConversationId]);
     
     // Scroll to bottom when messages change
-    React.useEffect(()
+    React.useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
+    
+    // Fetch available models function
+    const fetchModels = async () => {
+        setIsLoadingModels(true);
+        try {
+            // This would be a real API call in a production app
+            // Simulating a fetch request with some default models
+            const mockModels = [
+                { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo' },
+                { id: 'gpt-4', name: 'GPT-4' },
+                { id: 'codellama', name: 'Code Llama' }
+            ];
+            setAvailableModels(mockModels);
+            setSelectedModel(mockModels[0].id);
+        } catch (err) {
+            console.error('Failed to fetch models:', err);
+            setError('Failed to load AI models. Please try again later.');
+        } finally {
+            setIsLoadingModels(false);
+        }
+    };
+    
+    // Create a new chat
+    const handleNewChat = React.useCallback(() => {
+        const newConversation = {
+            id: Date.now().toString(),
+            title: 'New Conversation',
+            messages: []
+        };
+        
+        setConversations(prevConversations => [newConversation, ...prevConversations]);
+        setActiveConversationId(newConversation.id);
+        setMessages([]);
+        setError(null);
+    }, []);
+    
+    // Select a conversation
+    const handleSelectConversation = React.useCallback((conversationId) => {
+        setActiveConversationId(conversationId);
+        const conversation = conversations.find(c => c.id === conversationId);
+        if (conversation) {
+            setMessages(conversation.messages || []);
+            setError(null);
+        }
+        
+        // Close sidebar on mobile after selection
+        if (window.innerWidth < 768) {
+            setIsSidebarOpen(false);
+        }
+    }, [conversations]);
+    
+    // Send a message
+    const handleSendMessage = React.useCallback(async () => {
+        if (!inputValue.trim() || isWaitingForResponse) return;
+        
+        const userMessage = {
+            role: 'user',
+            content: inputValue
+        };
+        
+        // Update conversation with user message
+        const updatedMessages = [...messages, userMessage];
+        setMessages(updatedMessages);
+        setInputValue('');
+        setIsWaitingForResponse(true);
+        setError(null);
+        
+        try {
+            // This would call a real API in a production app
+            // Simulating API response delay
+            setTimeout(() => {
+                const aiResponse = {
+                    role: 'assistant',
+                    content: 'This is a placeholder response from the AI. In a real implementation, this would connect to an actual language model API.'
+                };
+                
+                const newMessages = [...updatedMessages, aiResponse];
+                setMessages(newMessages);
+                
+                // Update conversation in state
+                const updatedConversations = conversations.map(c => {
+                    if (c.id === activeConversationId) {
+                        // Update conversation title if this is the first message
+                        let title = c.title;
+                        if (c.messages.length === 0) {
+                            // Use first few words of first message as title
+                            title = inputValue.split(' ').slice(0, 3).join(' ') + '...';
+                        }
+                        return {
+                            ...c,
+                            title,
+                            messages: newMessages
+                        };
+                    }
+                    return c;
+                });
+                
+                setConversations(updatedConversations);
+                setIsWaitingForResponse(false);
+            }, 1000);
+        } catch (err) {
+            console.error('Error sending message:', err);
+            setError('Failed to get AI response. Please try again.');
+            setIsWaitingForResponse(false);
+        }
+    }, [messages, activeConversationId, conversations, inputValue]);
+    
+    // Copy message to clipboard
+    const handleCopyMessage = React.useCallback((content) => {
+        navigator.clipboard.writeText(content)
+            .then(() => {
+                // Could show a toast notification here
+                console.log('Message copied to clipboard');
+            })
+            .catch(err => {
+                console.error('Failed to copy message:', err);
+            });
+    }, []);
+    
+    // Toggle sidebar for mobile
+    const toggleSidebar = React.useCallback(() => {
+        setIsSidebarOpen(prevState => !prevState);
+    }, []);
+    
+    // Get active conversation title
+    const activeConversationTitle = React.useMemo(() => {
+        const activeConversation = conversations.find(c => c.id === activeConversationId);
+        return activeConversation ? activeConversation.title : 'CodeFace Chat';
+    }, [activeConversationId, conversations]);
+    
+    // Access the theme context
+    const { theme, toggleTheme } = React.useContext(ThemeContext);
+    
+    return (
+        <div className={`app-container ${theme}`}>
+            <Sidebar 
+                conversations={conversations}
+                activeConversationId={activeConversationId}
+                onSelectConversation={handleSelectConversation}
+                onNewChat={handleNewChat}
+                isSidebarOpen={isSidebarOpen}
+                toggleSidebar={toggleSidebar}
+            />
+            
+            <div className="main-content">
+                <div className="main-header">
+                    <SidebarToggle 
+                        toggleSidebar={toggleSidebar} 
+                        isSidebarOpen={isSidebarOpen} 
+                    />
+                    <div className="conversation-title">
+                        {activeConversationTitle}
+                    </div>
+                    <div className="header-actions">
+                        <ModelSelector 
+                            availableModels={availableModels}
+                            selectedModel={selectedModel}
+                            onModelChange={setSelectedModel}
+                            isLoading={isLoadingModels}
+                        />
+                        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+                    </div>
+                </div>
+                
+                <div className="chat-container" ref={chatContainerRef}>
+                    {activeConversationId ? (
+                        <div className="messages">
+                            {messages.map((message, index) => (
+                                <Message 
+                                    key={index} 
+                                    message={message} 
+                                    onCopy={handleCopyMessage} 
+                                />
+                            ))}
+                            {isWaitingForResponse && <ThinkingIndicator />}
+                            {error && <ErrorMessage message={error} />}
+                        </div>
+                    ) : (
+                        <div className="welcome-screen">
+                            <h1>Welcome to CodeFace</h1>
+                            <p>Start a new conversation to begin chatting with the AI.</p>
+                            <button 
+                                className="welcome-btn" 
+                                onClick={handleNewChat}
+                                aria-label="Start new chat"
+                            >
+                                <i className="fas fa-plus" aria-hidden="true"></i> New Chat
+                            </button>
+                        </div>
+                    )}
+                </div>
+                
+                {activeConversationId && (
+                    <ChatInput 
+                        inputValue={inputValue}
+                        onInputChange={setInputValue}
+                        onSendMessage={handleSendMessage}
+                        isWaitingForResponse={isWaitingForResponse}
+                        temperature={temperature}
+                        onTemperatureChange={setTemperature}
+                        maxTokens={maxTokens}
+                        onMaxTokensChange={setMaxTokens}
+                        systemPrompt={systemPrompt}
+                        onSystemPromptChange={setSystemPrompt}
+                    />
+                )}
+            </div>
+        </div>
+    );
+};
 
+export default App;
+
+// PropTypes definitions
+Sidebar.propTypes = {
+    conversations: PropTypes.array.isRequired,
+    activeConversationId: PropTypes.string,
+    onSelectConversation: PropTypes.func.isRequired,
+    onNewChat: PropTypes.func.isRequired,
+    isSidebarOpen: PropTypes.bool.isRequired,
+    toggleSidebar: PropTypes.func.isRequired
+};
+
+SidebarToggle.propTypes = {
+    toggleSidebar: PropTypes.func.isRequired,
+    isSidebarOpen: PropTypes.bool.isRequired
+};
+
+ThemeToggle.propTypes = {
+    theme: PropTypes.oneOf(['light', 'dark']).isRequired,
+    toggleTheme: PropTypes.func.isRequired
+};
+
+ModelSelector.propTypes = {
+    availableModels: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string
+        })
+    ).isRequired,
+    selectedModel: PropTypes.string,
+    onModelChange: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool
+};
+
+Message.propTypes = {
+    message: PropTypes.shape({
+        role: PropTypes.oneOf(['user', 'assistant', 'system']).isRequired,
+        content: PropTypes.string.isRequired
+    }).isRequired,
+    onCopy: PropTypes.func.isRequired
+};
+
+ThinkingIndicator.propTypes = {};
+
+ErrorMessage.propTypes = {
+    message: PropTypes.string.isRequired
+};
+
+ChatInput.propTypes = {
+    inputValue: PropTypes.string.isRequired,
+    onInputChange: PropTypes.func.isRequired,
+    onSendMessage: PropTypes.func.isRequired,
+    isWaitingForResponse: PropTypes.bool.isRequired,
+    temperature: PropTypes.number.isRequired,
+    onTemperatureChange: PropTypes.func.isRequired,
+    maxTokens: PropTypes.number.isRequired,
+    onMaxTokensChange: PropTypes.func.isRequired,
+    systemPrompt: PropTypes.string.isRequired,
+    onSystemPromptChange: PropTypes.func.isRequired
+};
